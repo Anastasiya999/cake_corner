@@ -1,0 +1,82 @@
+[
+  {
+    "id": 0,
+    "imageUrl": "/img/blueberry_nights.jpg",
+    "name": "Blueberry Nights",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 300,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 1,
+    "imageUrl": "/img/popcorn_unicorn.jpg",
+    "name": "Popcorn Unicorn",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 150,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 2,
+    "imageUrl": "/img/strawberry_lemonade.jpg",
+    "name": "Strawberry Lemonade",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 100,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 3,
+    "imageUrl": "/img/strawberry_cheesecake.jpg",
+    "name": "Strawberry Cheesecake",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 220,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 4,
+    "imageUrl": "/img/popcorn_unicorn.jpg",
+    "name": "Popcorn Unicorn",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 150,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 5,
+    "imageUrl": "/img/strawberry_lemonade.jpg",
+    "name": "Strawberry Lemonade",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 100,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 6,
+    "imageUrl": "/img/strawberry_cheesecake.jpg",
+    "name": "Strawberry Cheesecake",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 180,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 7,
+    "imageUrl": "/img/blueberry_nights.jpg",
+    "name": "Blueberry Nights",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 100,
+    "category": 0,
+    "rating": 4
+  }
+]

@@ -1,6 +1,8 @@
 @import "../variables";
 
 .product-block {
+  //background-color: $light-clr;
+
   min-width: 280px;
   text-align: center;
 
@@ -12,7 +14,7 @@
   z-index: 0;
 
   &__image {
-    height: 282px;
+    height: 290px;
     max-width: 234px;
   }
 
@@ -22,10 +24,11 @@
     font-family: $ff-cursive;
     font-weight: $fw-regular;
 
-    transform: rotate(-180deg);
+    transform: rotate(180deg);
     writing-mode: vertical-lr;
     text-align: center;
     right: 0.5em;
+    top: 0.5em;
   }
 
   &__selector {
@@ -67,8 +70,8 @@
 
   &__bottom {
     font-family: $ff-serif;
-    padding-inline: 0.5em;
-    padding-bottom: 0.5em;
+    padding-inline: 0.8em;
+    padding-bottom: 1em;
     display: flex;
     align-items: center;
     justify-content: space-between;

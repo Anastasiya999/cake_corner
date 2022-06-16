@@ -1,9 +1,10 @@
-import logo from "./logo.svg";
 import "./style/App.scss";
 import Header from "./components/Header";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import ProductCard from "./components/ProductCard";
+
+import products from "./mock_products.json";
 
 function App() {
   return (
@@ -17,36 +18,16 @@ function App() {
           </div>
           <h2 className=" content__title "> All cakes </h2>
           <div className="content__items">
-            <ProductCard
-              title="Strawberry Cheesecake"
-              imgSrc="/img/strawberry_cheesecake.jpg"
-              price={365}
-            />
-            <ProductCard
-              title="Popcorn Unicorn"
-              imgSrc="/img/popcorn_unicorn.jpg"
-              price={245}
-            />
-            <ProductCard
-              title="Popcorn Unicorn"
-              imgSrc="/img/popcorn_unicorn.jpg"
-              price={245}
-            />
-            <ProductCard
-              title="Strawberry Lemonade"
-              imgSrc="/img/strawberry_lemonade.jpg"
-              price={245}
-            />
-            <ProductCard
-              title="Popcorn Unicorn"
-              imgSrc="/img/popcorn_unicorn.jpg"
-              price={245}
-            />
-            <ProductCard
-              title="Strawberry Lemonade"
-              imgSrc="/img/strawberry_lemonade.jpg"
-              price={245}
-            />
+            {products.map((item, index) => {
+              return (
+                <ProductCard
+                  key={item.id}
+                  title={item.name}
+                  imgSrc={item.imageUrl}
+                  price={item.price}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
