@@ -1,0 +1,76 @@
+@import "../variables";
+
+.product-block {
+  min-width: 280px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  position: relative;
+  z-index: 0;
+
+  &__image {
+    height: 282px;
+    max-width: 234px;
+  }
+
+  &__title {
+    position: absolute;
+    font-size: $fs--500;
+    font-family: $ff-cursive;
+    font-weight: $fw-regular;
+
+    transform: rotate(-180deg);
+    writing-mode: vertical-lr;
+    text-align: center;
+    right: 0.5em;
+  }
+
+  &__selector {
+    display: flex;
+    background-color: $secondary-clr;
+
+    flex-direction: column;
+    padding: 6px;
+
+    ul {
+      display: flex;
+      flex: 1;
+
+      li {
+        padding: 8px;
+        flex: 1;
+        cursor: pointer;
+
+        font-weight: 600;
+        font-size: $fs--300;
+        font-family: $ff-serif;
+
+        @include noselect();
+        &.active {
+          background: $light-clr;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+          border-radius: 5px;
+          cursor: auto;
+        }
+      }
+    }
+  }
+
+  &__price {
+    font-weight: $fw-bold;
+    font-size: $fs--500;
+    font-family: $ff-serif;
+  }
+
+  &__bottom {
+    font-family: $ff-serif;
+    padding-inline: 0.5em;
+    padding-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
