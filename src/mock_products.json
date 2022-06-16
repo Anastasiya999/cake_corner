@@ -44,7 +44,7 @@
     "imageUrl": "/img/popcorn_unicorn.jpg",
     "name": "Popcorn Unicorn",
     "types": [0, 1],
-    "sizes": [26, 30, 40],
+    "sizes": [26, 30],
     "price": 150,
     "category": 0,
     "rating": 4
@@ -74,7 +74,7 @@
     "imageUrl": "/img/blueberry_nights.jpg",
     "name": "Blueberry Nights",
     "types": [0, 1],
-    "sizes": [26, 30, 40],
+    "sizes": [26, 30],
     "price": 100,
     "category": 0,
     "rating": 4

@@ -1,7 +1,19 @@
+import React from "react";
+
+const criteria = ["popularity", "price", "alphabet"];
+
 function Sort() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState(0);
+  const sortCriterium = criteria[selected];
+
+  const handleSelect = (index) => {
+    setSelected(index);
+    setIsOpen(false);
+  };
   return (
-    <div class="sort">
-      <div class="sort__label">
+    <div className="sort">
+      <div className="sort__label">
         <svg
           width="10"
           height="6"
@@ -15,15 +27,25 @@ function Sort() {
           />
         </svg>
         <b> Sort by: </b>
-        <span> popularity </span>
+        <span onClick={() => setIsOpen((prev) => !prev)}>{sortCriterium}</span>
       </div>
-      <div class="sort__popup">
-        <ul>
-          <li class=" active "> popularity </li>
-          <li> price </li>
-          <li> alphabet </li>
-        </ul>
-      </div>
+      {isOpen && (
+        <div className="sort__popup">
+          <ul>
+            {criteria.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  className={selected == index ? "active" : ""}
+                  onClick={() => handleSelect(index)}
+                >
+                  {item}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

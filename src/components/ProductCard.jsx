@@ -1,13 +1,23 @@
-function ProductCard({ title, price, imgSrc }) {
+import React from "react";
+function ProductCard({ name, price, imageUrl, sizes }) {
+  const [activeSize, setActiveSize] = React.useState(0);
   return (
     <div className="product-block">
-      <img className="product-block__image" src={imgSrc} alt="Cake" />
-      <h4 className=" product-block__title "> {title}</h4>
+      <img className="product-block__image" src={imageUrl} alt="Cake" />
+      <h4 className=" product-block__title "> {name}</h4>
       <div className="product-block__selector">
         <ul>
-          <li className="active">26 sm</li>
-          <li> 30 sm </li>
-          <li> 40 sm </li>
+          {sizes.map((size, index) => {
+            return (
+              <li
+                className={activeSize == index ? "active" : ""}
+                key={index}
+                onClick={() => setActiveSize(index)}
+              >
+                {size} sm
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div className="product-block__bottom">

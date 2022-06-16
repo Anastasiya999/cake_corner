@@ -1,3 +1,4 @@
+import React from "react";
 import "./style/App.scss";
 import Header from "./components/Header";
 import Categories from "./components/Categories";
@@ -7,6 +8,13 @@ import ProductCard from "./components/ProductCard";
 import products from "./mock_products.json";
 
 function App() {
+  const [items, setItems] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://cakecorner.free.beeceptor.com/items")
+      .then((res) => res.json())
+      .then((result) => setItems(result));
+  }, []);
   return (
     <div className="wrapper">
       <Header />
@@ -18,15 +26,8 @@ function App() {
           </div>
           <h2 className=" content__title "> All cakes </h2>
           <div className="content__items">
-            {products.map((item, index) => {
-              return (
-                <ProductCard
-                  key={item.id}
-                  title={item.name}
-                  imgSrc={item.imageUrl}
-                  price={item.price}
-                />
-              );
+            {items.map((item, index) => {
+              return <ProductCard key={item.id} {...item} />;
             })}
           </div>
         </div>
