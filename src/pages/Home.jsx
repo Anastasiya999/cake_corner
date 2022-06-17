@@ -3,7 +3,8 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import ProductCard from "../components/ProductCard";
 import Skeleton from "../components/ProductCard/Skeleton";
-function Home() {
+import Search from "../components/Search";
+function Home({ searchValue }) {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -17,9 +18,10 @@ function Home() {
     setIsLoading(true);
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const sortBy = `sortBy=${sortType.sortProperty}`;
+    const search = searchValue ? `search=${searchValue}` : "";
 
     fetch(
-      `https://62aca39d402135c7acb6030c.mockapi.io/items?${category}&${sortBy}`
+      `https://62aca39d402135c7acb6030c.mockapi.io/items?${category}&${sortBy}&${search}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -28,7 +30,7 @@ function Home() {
       });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
   return (
     <>
       <div className="content__top">

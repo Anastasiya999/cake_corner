@@ -20,6 +20,10 @@
       font-size: $fs--600;
       font-family: $ff-cursive;
       font-weight: 400;
+
+      @media (max-width: 400px) {
+        font-size: $fs--500;
+      }
     }
   }
 }
