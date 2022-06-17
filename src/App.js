@@ -1,44 +1,23 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+
 import "./style/App.scss";
 import Header from "./components/Header";
-import Categories from "./components/Categories";
-import Sort from "./components/Sort";
-import ProductCard from "./components/ProductCard";
-import Skeleton from "./components/ProductCard/Skeleton";
-
-import products from "./mock_products.json";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Cart from "./pages/Cart";
 
 function App() {
-  const [items, setItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    fetch("https://cakecorner.free.beeceptor.com/items")
-      .then((res) => res.json())
-      .then((result) => {
-        setItems(result);
-        setIsLoading(false);
-      });
-  }, []);
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
         <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className=" content__title "> All cakes </h2>
-          <div className="content__items">
-            {isLoading
-              ? [...Array(8)].map((item, index) => {
-                  return <Skeleton key={index} {...item} />;
-                })
-              : items.map((item, index) => {
-                  return <ProductCard key={item.id} {...item} />;
-                })}
-          </div>
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/cart" exact element={<Cart />} />
+            <Route path="*" exact element={<NotFound />} />
+          </Routes>
         </div>
       </div>
     </div>

@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <div class="header">
       <div class="container">
         <div class="header__logo">
-          <h1>Cake corner</h1>
+          <Link to="/">
+            <h1>Cake corner</h1>
+          </Link>
         </div>
         <div class="header__cart">
-          <a href="/cart.html" class="button button--cart">
+          <Link to="/cart" className="button button--cart">
             <span>520 pln</span>
             <div class="button__delimiter"></div>
             <svg
@@ -38,7 +42,7 @@ function Header() {
                 stroke-linejoin="round"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

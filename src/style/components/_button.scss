@@ -135,4 +135,21 @@
       background-color: darken($primary-clr, 8%);
     }
   }
+
+  &--pay {
+    background-color: transparent;
+    color: $dark-medium-clr;
+    font-size: $fs--400;
+    border: 1px solid $dark-medium-clr;
+    font-family: $ff-serif;
+
+    &:hover {
+      color: $light-clr;
+      background-color: $primary-clr;
+    }
+
+    &:active {
+      background-color: darken($primary-clr, 10%);
+    }
+  }
 }
