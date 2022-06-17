@@ -1,14 +1,18 @@
 import React from "react";
 
-const criteria = ["popularity", "price", "alphabet"];
+const criteria = [
+  { name: "popularity", sortProperty: "rating" },
+  { name: "price", sortProperty: "price" },
+  { name: "alphabet", sortProperty: "name" },
+];
 
-function Sort() {
+function Sort({ value, onChangeType }) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState(0);
-  const sortCriterium = criteria[selected];
+  //const [selected, setSelected] = React.useState(0);
+  // const sortCriterium = criteria[value];
 
   const handleSelect = (index) => {
-    setSelected(index);
+    onChangeType(index);
     setIsOpen(false);
   };
   return (
@@ -27,7 +31,7 @@ function Sort() {
           />
         </svg>
         <b> Sort by: </b>
-        <span onClick={() => setIsOpen((prev) => !prev)}>{sortCriterium}</span>
+        <span onClick={() => setIsOpen((prev) => !prev)}>{value.name}</span>
       </div>
       {isOpen && (
         <div className="sort__popup">
@@ -36,10 +40,12 @@ function Sort() {
               return (
                 <li
                   key={index}
-                  className={selected == index ? "active" : ""}
-                  onClick={() => handleSelect(index)}
+                  className={
+                    value.sortProperty == item.sortProperty ? "active" : ""
+                  }
+                  onClick={() => handleSelect(item)}
                 >
-                  {item}
+                  {item.name}
                 </li>
               );
             })}
