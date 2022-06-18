@@ -1,29 +1,38 @@
 import React from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux/es/exports";
+import { useNavigate } from "react-router-dom";
+import qs from "qs";
+import { useSelector, useDispatch } from "react-redux";
 import Categories from "../components/Categories";
-import Sort from "../components/Sort";
+import Sort, { criteria } from "../components/Sort";
 import ProductCard from "../components/ProductCard";
 import Skeleton from "../components/ProductCard/Skeleton";
 import SearchContext from "../context";
 
-import { setCategoryId } from "../redux/slices/filterSlice";
+import { setCategoryId, setFilters } from "../redux/slices/filterSlice";
 
 import Pagination from "../components/Pagination";
 function Home() {
-  const { searchValue } = React.useContext(SearchContext);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
 
-  const onChangeCategoryId = (id) => {
+  const isSearch = React.useRef(false);
+  const isMounted = React.useRef(false);
+
+  const { searchValue } = React.useContext(SearchContext);
+  const { categoryId, sort, currentPage } = useSelector(
+    (state) => state.filter
+  );
+  const sortType = sort.sortProperty;
+
+  const onChangeCategoryId = React.useCallback((id) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
-  React.useEffect(() => {
+  const fetchItems = () => {
     setIsLoading(true);
 
     const category =
@@ -39,8 +48,44 @@ function Home() {
         setItems(response.data);
         setIsLoading(false);
       });
+  };
 
+  React.useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = criteria.find(
+        (item) => item.sortProperty == params.sortProperty
+      );
+      dispatch(
+        setFilters({
+          ...params,
+          sort,
+        })
+      );
+      isSearch.current = true;
+    }
+  }, []);
+
+  React.useEffect(() => {
     window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      fetchItems();
+    }
+    isSearch.current = false;
+  }, [categoryId, sortType, searchValue, currentPage]);
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const query = qs.stringify({
+        sortProperty: sortType,
+        categoryId,
+        currentPage,
+      });
+
+      navigate(`?${query}`);
+    }
+
+    isMounted.current = true;
   }, [categoryId, sortType, searchValue, currentPage]);
   return (
     <>
@@ -58,7 +103,7 @@ function Home() {
               return <ProductCard key={item.id} {...item} />;
             })}
       </div>
-      <Pagination setPage={setCurrentPage} />
+      <Pagination page={currentPage} />
     </>
   );
 }
