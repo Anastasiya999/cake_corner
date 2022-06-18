@@ -1,0 +1,32 @@
+@import "../../style/variables";
+
+.pagination {
+  margin-top: 1rem;
+  :global {
+    li {
+      display: inline-block;
+      margin-right: 1em;
+      a {
+        padding: 0.5em 1em;
+        border: 1px solid $primary-clr;
+        border-radius: 30px;
+
+        cursor: pointer;
+
+        &:hover {
+          background-color: $primary-clr;
+          color: $light-clr;
+        }
+      }
+    }
+  }
+
+  :global {
+    .selected {
+      a {
+        background-color: $primary-clr;
+        color: $light-clr;
+      }
+    }
+  }
+}

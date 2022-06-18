@@ -3,11 +3,12 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import ProductCard from "../components/ProductCard";
 import Skeleton from "../components/ProductCard/Skeleton";
-import Search from "../components/Search";
+
+import Pagination from "../components/Pagination";
 function Home({ searchValue }) {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-
+  const [currentPage, setCurrentPage] = React.useState(1);
   const [categoryId, setCategoryId] = React.useState(0);
   const [sortType, setSortType] = React.useState({
     name: "popularity",
@@ -21,7 +22,7 @@ function Home({ searchValue }) {
     const search = searchValue ? `search=${searchValue}` : "";
 
     fetch(
-      `https://62aca39d402135c7acb6030c.mockapi.io/items?${category}&${sortBy}&${search}`
+      `https://62aca39d402135c7acb6030c.mockapi.io/items?page=${currentPage}&limit=4${category}&${sortBy}&${search}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -30,7 +31,7 @@ function Home({ searchValue }) {
       });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue]);
+  }, [categoryId, sortType, searchValue, currentPage]);
   return (
     <>
       <div className="content__top">
@@ -47,6 +48,7 @@ function Home({ searchValue }) {
               return <ProductCard key={item.id} {...item} />;
             })}
       </div>
+      <Pagination setPage={setCurrentPage} />
     </>
   );
 }
