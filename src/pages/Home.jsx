@@ -3,9 +3,11 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import ProductCard from "../components/ProductCard";
 import Skeleton from "../components/ProductCard/Skeleton";
+import SearchContext from "../context";
 
 import Pagination from "../components/Pagination";
-function Home({ searchValue }) {
+function Home() {
+  const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -17,12 +19,14 @@ function Home({ searchValue }) {
 
   React.useEffect(() => {
     setIsLoading(true);
-    const category = categoryId > 0 ? `category=${categoryId}` : "";
+
+    const category =
+      categoryId > 0 && currentPage == 1 ? `category=${categoryId}` : "";
     const sortBy = `sortBy=${sortType.sortProperty}`;
     const search = searchValue ? `search=${searchValue}` : "";
 
     fetch(
-      `https://62aca39d402135c7acb6030c.mockapi.io/items?page=${currentPage}&limit=4${category}&${sortBy}&${search}`
+      `https://62aca39d402135c7acb6030c.mockapi.io/items?page=${currentPage}&limit=4&${category}&${sortBy}&${search}`
     )
       .then((res) => res.json())
       .then((result) => {

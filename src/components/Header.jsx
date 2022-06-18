@@ -1,7 +1,10 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import SearchContext from "../context";
 
-function Header({ searchValue, setSearchValue }) {
+function Header() {
+  const { searchValue, setSearchValue } = React.useContext(SearchContext);
   return (
     <div class="header">
       <div class="container">
