@@ -1,6 +1,16 @@
 .search {
+  position: relative;
   width: 30%;
   text-align: end;
+
+  img {
+    position: absolute;
+    right: 0;
+    top: -0.5em;
+    height: 1em;
+    width: 1em;
+    cursor: pointer;
+  }
 
   input {
     outline: none;

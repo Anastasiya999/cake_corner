@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
@@ -30,12 +31,12 @@ function Home() {
     const sortBy = `sortBy=${sortType}`;
     const search = searchValue ? `search=${searchValue}` : "";
 
-    fetch(
-      `https://62aca39d402135c7acb6030c.mockapi.io/items?page=${currentPage}&limit=4&${category}&${sortBy}&${search}`
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        setItems(result);
+    axios
+      .get(
+        `https://62aca39d402135c7acb6030c.mockapi.io/items?page=${currentPage}&limit=4&${category}&${sortBy}&${search}`
+      )
+      .then((response) => {
+        setItems(response.data);
         setIsLoading(false);
       });
 
