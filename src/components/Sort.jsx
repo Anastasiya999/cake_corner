@@ -9,16 +9,32 @@ export const criteria = [
 ];
 
 function Sort() {
-  const [isOpen, setIsOpen] = React.useState(false);
   const dispatch = useDispatch();
   const value = useSelector((state) => state.filter.sort);
+  const sortRef = React.useRef();
+
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const handleSelect = (index) => {
     dispatch(setSort(index));
     setIsOpen(false);
   };
+
+  React.useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.path.includes(sortRef.current)) {
+        setIsOpen(false);
+      }
+    };
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div className="sort" ref={sortRef}>
       <div className="sort__label">
         <svg
           width="10"

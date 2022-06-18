@@ -50,6 +50,7 @@ function Home() {
       });
   };
 
+  //on first render chceck url parameters, if so - save in redux store
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -66,6 +67,7 @@ function Home() {
     }
   }, []);
 
+  //if we have params in url during first render don't fetch data
   React.useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
@@ -74,6 +76,7 @@ function Home() {
     isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
+  //first render - don't save params to url
   React.useEffect(() => {
     if (isMounted.current) {
       const query = qs.stringify({
@@ -84,9 +87,10 @@ function Home() {
 
       navigate(`?${query}`);
     }
-
+    // flag the first render
     isMounted.current = true;
   }, [categoryId, sortType, searchValue, currentPage]);
+
   return (
     <>
       <div className="content__top">
