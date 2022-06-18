@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux/es/exports";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import ProductCard from "../components/ProductCard";
 import Skeleton from "../components/ProductCard/Skeleton";
 import SearchContext from "../context";
+
+import { setCategoryId } from "../redux/slices/filterSlice";
 
 import Pagination from "../components/Pagination";
 function Home() {
@@ -11,18 +14,20 @@ function Home() {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [categoryId, setCategoryId] = React.useState(0);
-  const [sortType, setSortType] = React.useState({
-    name: "popularity",
-    sortProperty: "rating",
-  });
+  const dispatch = useDispatch();
+  const categoryId = useSelector((state) => state.filter.categoryId);
+  const sortType = useSelector((state) => state.filter.sort.sortProperty);
+
+  const onChangeCategoryId = (id) => {
+    dispatch(setCategoryId(id));
+  };
 
   React.useEffect(() => {
     setIsLoading(true);
 
     const category =
       categoryId > 0 && currentPage == 1 ? `category=${categoryId}` : "";
-    const sortBy = `sortBy=${sortType.sortProperty}`;
+    const sortBy = `sortBy=${sortType}`;
     const search = searchValue ? `search=${searchValue}` : "";
 
     fetch(
@@ -39,8 +44,8 @@ function Home() {
   return (
     <>
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={setCategoryId} />
-        <Sort value={sortType} onChangeType={setSortType} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategoryId} />
+        <Sort />
       </div>
       <h2 className=" content__title "> All cakes </h2>
       <div className="content__items">

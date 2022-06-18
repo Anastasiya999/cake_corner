@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setSort } from "../redux/slices/filterSlice";
 
 const criteria = [
   { name: "popularity", sortProperty: "rating" },
@@ -6,13 +8,13 @@ const criteria = [
   { name: "alphabet", sortProperty: "name" },
 ];
 
-function Sort({ value, onChangeType }) {
+function Sort() {
   const [isOpen, setIsOpen] = React.useState(false);
-  //const [selected, setSelected] = React.useState(0);
-  // const sortCriterium = criteria[value];
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.filter.sort);
 
   const handleSelect = (index) => {
-    onChangeType(index);
+    dispatch(setSort(index));
     setIsOpen(false);
   };
   return (
