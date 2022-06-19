@@ -1,9 +1,12 @@
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { selectCartData } from "../redux/slices/cartSlice";
 import CartEmpty from "../components/CartEmpty";
 
 function Cart() {
-  const items = useSelector((state) => state.cart.items);
+  const { items, totalPrice } = useSelector(selectCartData);
+  const navigate = useNavigate();
 
   return (
     <div className="cart">
@@ -40,26 +43,35 @@ function Cart() {
           <span>Empty cart</span>
         </div>
       </div>
+      {totalPrice > 0 ? (
+        <>
+          {" "}
+          <div className="cart__items">
+            {items.map((item) => (
+              <CartItem key={item.id} {...item} />
+            ))}
+          </div>
+          <div className="cart__bottom">
+            <div className="cart__bottom-details">
+              <span>
+                All: <b>2</b> items
+              </span>
+              <span>
+                Total: <b>{`${totalPrice} pln`}</b>
+              </span>
+            </div>
+            <div className="cart__bottom-buttons">
+              <Link to="/">
+                <button className="button button--outline">Return</button>
+              </Link>
 
-      <div className="cart__items">
-        {(items || []).map((item) => (
-          <CartItem key={item.id} {...item} />
-        ))}
-      </div>
-      <div className="cart__bottom">
-        <div className="cart__bottom-details">
-          <span>
-            All: <b>2</b> items
-          </span>
-          <span>
-            Total: <b>200 pln</b>
-          </span>
-        </div>
-        <div className="cart__bottom-buttons">
-          <button className="button button--outline">Return</button>
-          <button className="button button--pay">Order</button>
-        </div>
-      </div>
+              <button className="button button--pay">Order</button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <CartEmpty />
+      )}
     </div>
   );
 }
