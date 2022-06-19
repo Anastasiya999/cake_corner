@@ -8,25 +8,27 @@ import Sort, { criteria } from "../components/Sort";
 import ProductCard from "../components/ProductCard";
 import Skeleton from "../components/ProductCard/Skeleton";
 
-import { setCategoryId, setFilters } from "../redux/slices/filterSlice";
+import {
+  setCategoryId,
+  setFilters,
+  selectFilter,
+} from "../redux/slices/filterSlice";
 
 import Pagination from "../components/Pagination";
-import { fetchProducts } from "../redux/slices/productSlice";
-function Home() {
+import { fetchProducts, selectProductData } from "../redux/slices/productSlice";
+const Home: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter
-  );
-  const searchValue = useSelector((state) => state.filter.search);
-  const { items, status } = useSelector((state) => state.product);
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(selectFilter);
+  const { items, status } = useSelector(selectProductData);
   const sortType = sort.sortProperty;
 
-  const onChangeCategoryId = (id) => {
+  const onChangeCategoryId = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
@@ -37,6 +39,7 @@ function Home() {
     const search = searchValue ? `search=${searchValue}` : "";
 
     dispatch(
+      //@ts-ignore
       fetchProducts({
         currentPage,
         category,
@@ -102,12 +105,12 @@ function Home() {
           ? [...Array(8)].map((item, index) => {
               return <Skeleton key={index} {...item} />;
             })
-          : items.map((item, index) => {
+          : items.map((item: any) => {
               return <ProductCard key={item.id} {...item} />;
             })}
       </div>
       <Pagination page={currentPage} />
     </>
   );
-}
+};
 export default Home;

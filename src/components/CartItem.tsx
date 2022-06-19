@@ -2,7 +2,23 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../redux/slices/cartSlice";
 
-function CartItem({ id, imageUrl, name, count, price, size }) {
+type CartItemProps = {
+  id: number;
+  imageUrl: string;
+  name: string;
+  count: number;
+  price: number;
+  size: number[];
+};
+
+const CartItem: React.FC<CartItemProps> = ({
+  id,
+  imageUrl,
+  name,
+  count,
+  price,
+  size,
+}) => {
   const dispatch = useDispatch();
 
   const handleAdd = () => {
@@ -31,6 +47,6 @@ function CartItem({ id, imageUrl, name, count, price, size }) {
       <span className="cart__item-remove">delete</span>
     </div>
   );
-}
+};
 
 export default CartItem;

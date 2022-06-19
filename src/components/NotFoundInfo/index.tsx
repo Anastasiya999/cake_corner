@@ -1,6 +1,6 @@
 import styles from "./NotFoundInfo.module.scss";
 
-function NotFoundInfo() {
+const NotFoundInfo: React.FC = () => {
   return (
     <div className={styles.block}>
       <span>🥺</span>
@@ -8,6 +8,6 @@ function NotFoundInfo() {
       <p>Unfortunately this page does not exist on our site</p>
     </div>
   );
-}
+};
 
 export default NotFoundInfo;

@@ -9,9 +9,9 @@ function Header() {
   const location = useLocation();
 
   return (
-    <div class="header">
-      <div class="container">
-        <div class="header__logo">
+    <div className="header">
+      <div className="container">
+        <div className="header__logo">
           <Link to="/">
             <h1>Cake corner</h1>
           </Link>
@@ -20,10 +20,10 @@ function Header() {
         {location.pathname !== "/cart" && (
           <>
             <Search />
-            <div class="header__cart">
+            <div className="header__cart">
               <Link to="/cart" className="button button--cart">
                 <span>{`${totalPrice} pln`}</span>
-                <div class="button__delimiter"></div>
+                <div className="button__delimiter"></div>
 
                 <svg
                   width="18"
@@ -54,7 +54,12 @@ function Header() {
                     stroke-linejoin="round"
                   />
                 </svg>
-                <p>{items.reduce((sum, item) => item.count + sum, 0)}</p>
+                <p>
+                  {items.reduce(
+                    (sum: number, item: any) => item.count + sum,
+                    0
+                  )}
+                </p>
               </Link>
             </div>
           </>

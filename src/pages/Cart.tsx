@@ -1,12 +1,11 @@
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { selectCartData } from "../redux/slices/cartSlice";
 import CartEmpty from "../components/CartEmpty";
 
-function Cart() {
+const Cart: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCartData);
-  const navigate = useNavigate();
 
   return (
     <div className="cart">
@@ -47,7 +46,7 @@ function Cart() {
         <>
           {" "}
           <div className="cart__items">
-            {items.map((item) => (
+            {items.map((item: any) => (
               <CartItem key={item.id} {...item} />
             ))}
           </div>
@@ -74,6 +73,6 @@ function Cart() {
       )}
     </div>
   );
-}
+};
 
 export default Cart;

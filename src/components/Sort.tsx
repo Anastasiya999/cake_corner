@@ -1,8 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSort } from "../redux/slices/filterSlice";
+import { setSort, selectSort } from "../redux/slices/filterSlice";
 
-export const criteria = [
+type Criterium = {
+  name: string;
+  sortProperty: string;
+};
+
+export const criteria: Criterium[] = [
   { name: "popularity", sortProperty: "rating" },
   { name: "price", sortProperty: "price" },
   { name: "alphabet", sortProperty: "name" },
@@ -10,18 +15,18 @@ export const criteria = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const value = useSelector((state) => state.filter.sort);
-  const sortRef = React.useRef();
+  const value = useSelector(selectSort);
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleSelect = (index) => {
+  const handleSelect = (index: Criterium) => {
     dispatch(setSort(index));
     setIsOpen(false);
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if (!e.path.includes(sortRef.current)) {
         setIsOpen(false);
       }

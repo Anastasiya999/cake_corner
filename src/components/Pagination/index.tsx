@@ -5,7 +5,11 @@ import { setCurrentPage } from "../../redux/slices/filterSlice";
 
 import styles from "./Pagination.module.scss";
 
-function Pagination({ page }) {
+type PaginationProps = {
+  page: number;
+};
+
+const Pagination: React.FC<PaginationProps> = ({ page }) => {
   const dispatch = useDispatch();
 
   return (
@@ -18,9 +22,8 @@ function Pagination({ page }) {
       pageRangeDisplayed={8}
       pageCount={3}
       previousLabel="<"
-      renderOnZeroPageCount={null}
     />
   );
-}
+};
 
 export default Pagination;

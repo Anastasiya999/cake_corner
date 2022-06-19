@@ -43,5 +43,6 @@ export const productSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { setItems } = productSlice.actions;
+export const selectProductData = (state) => state.product;
 
 export default productSlice.reducer;

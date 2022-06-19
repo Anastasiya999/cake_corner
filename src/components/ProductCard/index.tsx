@@ -1,12 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../redux/slices/cartSlice";
+import { addItem, selectCartById } from "../../redux/slices/cartSlice";
 
-function ProductCard({ id, name, price, imageUrl, sizes }) {
+type ProductCardProps = {
+  id: number;
+  name: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+};
+
+const ProductCard: React.FC<ProductCardProps> = ({
+  id,
+  name,
+  price,
+  imageUrl,
+  sizes,
+}) => {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) =>
-    state.cart.items.find((item) => item.id === id)
-  );
+  const cartItem = useSelector(selectCartById(id));
   const [activeSize, setActiveSize] = React.useState(0);
   const addedCount = cartItem ? cartItem.count : 0;
 
@@ -65,6 +77,6 @@ function ProductCard({ id, name, price, imageUrl, sizes }) {
       </div>
     </div>
   );
-}
+};
 
 export default ProductCard;
