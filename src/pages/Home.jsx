@@ -12,12 +12,10 @@ import SearchContext from "../context";
 import { setCategoryId, setFilters } from "../redux/slices/filterSlice";
 
 import Pagination from "../components/Pagination";
+import { fetchProducts, setItems } from "../redux/slices/productSlice";
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [items, setItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
 
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
@@ -26,34 +24,41 @@ function Home() {
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   );
+  const { items, status } = useSelector((state) => state.product);
   const sortType = sort.sortProperty;
 
-  const onChangeCategoryId = React.useCallback((id) => {
+  const onChangeCategoryId = (id) => {
     dispatch(setCategoryId(id));
-  }, []);
+  };
 
-  const fetchItems = () => {
-    setIsLoading(true);
-
+  const fetchItems = async () => {
     const category =
       categoryId > 0 && currentPage == 1 ? `category=${categoryId}` : "";
     const sortBy = `sortBy=${sortType}`;
     const search = searchValue ? `search=${searchValue}` : "";
 
-    axios
-      .get(
-        `https://62aca39d402135c7acb6030c.mockapi.io/items?page=${currentPage}&limit=4&${category}&${sortBy}&${search}`
-      )
-      .then((response) => {
-        setItems(response.data);
-        setIsLoading(false);
-      });
+    dispatch(
+      fetchProducts({
+        currentPage,
+        category,
+        sortBy,
+        search,
+      })
+    );
   };
+  //if we have params in url during first render don't fetch data
+  React.useEffect(() => {
+    if (!isSearch.current) {
+      fetchItems();
+    }
+    isSearch.current = false;
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   //on first render chceck url parameters, if so - save in redux store
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
+
       const sort = criteria.find(
         (item) => item.sortProperty == params.sortProperty
       );
@@ -63,18 +68,13 @@ function Home() {
           sort,
         })
       );
+      console.log({
+        ...params,
+        sort,
+      });
       isSearch.current = true;
     }
   }, []);
-
-  //if we have params in url during first render don't fetch data
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-    if (!isSearch.current) {
-      fetchItems();
-    }
-    isSearch.current = false;
-  }, [categoryId, sortType, searchValue, currentPage]);
 
   //first render - don't save params to url
   React.useEffect(() => {
@@ -99,7 +99,7 @@ function Home() {
       </div>
       <h2 className=" content__title "> All cakes </h2>
       <div className="content__items">
-        {isLoading
+        {status === "loading"
           ? [...Array(8)].map((item, index) => {
               return <Skeleton key={index} {...item} />;
             })

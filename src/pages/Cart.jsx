@@ -1,6 +1,9 @@
 import CartItem from "../components/CartItem";
+import { useSelector } from "react-redux";
 
 function Cart() {
+  const items = useSelector((state) => state.cart.items);
+  console.log(items);
   return (
     <div className="cart">
       <div className="cart__top">
@@ -37,9 +40,9 @@ function Cart() {
         </div>
       </div>
       <div className="cart__items">
-        <CartItem />
-        <CartItem />
-        <CartItem />
+        {(items || []).map((item) => (
+          <CartItem key={item.id} {...item} />
+        ))}
       </div>
       <div className="cart__bottom">
         <div className="cart__bottom-details">

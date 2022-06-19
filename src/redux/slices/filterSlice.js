@@ -9,7 +9,7 @@ const initialState = {
   currentPage: 1,
 };
 
-export const filter = createSlice({
+export const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
@@ -37,6 +37,6 @@ export const filter = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { setCategoryId, setSort, setCurrentPage, setFilters } =
-  filter.actions;
+  filterSlice.actions;
 
-export default filter.reducer;
+export default filterSlice.reducer;

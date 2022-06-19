@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import SearchContext from "../context";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const { totalPrice, items } = useSelector((state) => state.cart);
+
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
+
   return (
     <div class="header">
       <div class="container">
@@ -16,8 +20,9 @@ function Header() {
         <Search searchValue={searchValue} setSearchValue={setSearchValue} />
         <div class="header__cart">
           <Link to="/cart" className="button button--cart">
-            <span>520 pln</span>
+            <span>{`${totalPrice} pln`}</span>
             <div class="button__delimiter"></div>
+
             <svg
               width="18"
               height="18"
@@ -47,6 +52,7 @@ function Header() {
                 stroke-linejoin="round"
               />
             </svg>
+            <p>{items.reduce((sum, item) => item.count + sum, 0)}</p>
           </Link>
         </div>
       </div>
