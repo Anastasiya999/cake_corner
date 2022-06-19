@@ -1,13 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
-import SearchContext from "../context";
 import { useSelector } from "react-redux";
 
 function Header() {
   const { totalPrice, items } = useSelector((state) => state.cart);
-
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
 
   return (
     <div class="header">
@@ -17,7 +14,7 @@ function Header() {
             <h1>Cake corner</h1>
           </Link>
         </div>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+        <Search />
         <div class="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>{`${totalPrice} pln`}</span>

@@ -3,8 +3,6 @@ import React from "react";
 const categories = ["All", "Vegan", "Chocolate", "Cheesecake", " GlutenFree"];
 
 function Categories({ value, onChangeCategory }) {
-  //const [activeCategory, setActive] = React.useState(0);
-
   return (
     <div className="categories">
       <ul>

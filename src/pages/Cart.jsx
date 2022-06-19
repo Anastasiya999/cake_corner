@@ -4,7 +4,7 @@ import CartEmpty from "../components/CartEmpty";
 
 function Cart() {
   const items = useSelector((state) => state.cart.items);
-  console.log(items);
+
   return (
     <div className="cart">
       <div className="cart__top">

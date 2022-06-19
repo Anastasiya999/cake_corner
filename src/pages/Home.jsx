@@ -7,12 +7,11 @@ import Categories from "../components/Categories";
 import Sort, { criteria } from "../components/Sort";
 import ProductCard from "../components/ProductCard";
 import Skeleton from "../components/ProductCard/Skeleton";
-import SearchContext from "../context";
 
 import { setCategoryId, setFilters } from "../redux/slices/filterSlice";
 
 import Pagination from "../components/Pagination";
-import { fetchProducts, setItems } from "../redux/slices/productSlice";
+import { fetchProducts } from "../redux/slices/productSlice";
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,10 +19,10 @@ function Home() {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { searchValue } = React.useContext(SearchContext);
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   );
+  const searchValue = useSelector((state) => state.filter.search);
   const { items, status } = useSelector((state) => state.product);
   const sortType = sort.sortProperty;
 
