@@ -8,6 +8,23 @@
 
   gap: 1rem;
 
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      font-family: $ff-serif;
+      font-weight: $fw-regular;
+    }
+
+    img {
+      max-width: 60vw;
+      mix-blend-mode: multiply;
+    }
+  }
+
   &__top {
     display: flex;
     align-items: center;

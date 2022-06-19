@@ -1,5 +1,6 @@
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
+import CartEmpty from "../components/CartEmpty";
 
 function Cart() {
   const items = useSelector((state) => state.cart.items);
@@ -39,6 +40,7 @@ function Cart() {
           <span>Empty cart</span>
         </div>
       </div>
+
       <div className="cart__items">
         {(items || []).map((item) => (
           <CartItem key={item.id} {...item} />
