@@ -1,11 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addItem,
-  CartItemType,
-  selectCartById,
-} from "../../redux/slices/cartSlice";
-import { Product } from "../../redux/slices/productSlice";
+import { selectCartById } from "../../redux/slices/cart/selectors";
+import { addItem } from "../../redux/slices/cart/slice";
+import { CartItemType } from "../../redux/slices/cart/types";
 
 type ProductCardProps = {
   id: number;

@@ -12,10 +12,11 @@ import { useAppDispatch } from "../redux/store";
 import {
   setCategoryId,
   setFilters,
-  selectFilter,
   setCurrentPage,
-} from "../redux/slices/filterSlice";
-import { fetchProducts, selectProductData } from "../redux/slices/productSlice";
+} from "../redux/slices/filter/slice";
+import { fetchProducts } from "../redux/slices/product/slice";
+import { selectFilter } from "../redux/slices/filter/selectors";
+import { selectProductData } from "../redux/slices/product/selectors";
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();

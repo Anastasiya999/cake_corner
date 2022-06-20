@@ -1,6 +1,7 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setSort, selectSort, SortType } from "../redux/slices/filterSlice";
+import { useDispatch } from "react-redux";
+import { setSort } from "../redux/slices/filter/slice";
+import { SortType } from "../redux/slices/filter/types";
 
 export const criteria: SortType[] = [
   { name: "popularity", sortProperty: "rating" },

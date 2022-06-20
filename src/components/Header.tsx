@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
 import { useSelector } from "react-redux";
-import { selectCartData } from "../redux/slices/cartSlice";
+import { selectCartData } from "../redux/slices/cart/selectors";
 
 function Header() {
   const { totalPrice, items } = useSelector(selectCartData);

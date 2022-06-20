@@ -1,20 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-
-export type Product = {
-  id: number;
-  name: string;
-  price: number;
-  imageUrl: string;
-  sizes: number[];
-};
-
-export enum Status {
-  LOADING = "loading",
-  SUCCESS = "success",
-  ERROR = "error",
-}
+import { Product, ProductSliceState, Status } from "./types";
 
 export const fetchProducts = createAsyncThunk<
   Product[],
@@ -28,11 +14,6 @@ export const fetchProducts = createAsyncThunk<
     return data;
   }
 );
-
-interface ProductSliceState {
-  status: Status;
-  items: Product[];
-}
 
 const initialState: ProductSliceState = {
   items: [],
@@ -66,6 +47,5 @@ export const productSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { setItems } = productSlice.actions;
-export const selectProductData = (state: RootState) => state.product;
 
 export default productSlice.reducer;
