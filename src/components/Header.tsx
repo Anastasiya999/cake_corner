@@ -6,7 +6,17 @@ import { selectCartData } from "../redux/slices/cartSlice";
 
 function Header() {
   const { totalPrice, items } = useSelector(selectCartData);
+  const isMounted = React.useRef(false);
   const location = useLocation();
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      localStorage.setItem("cart", JSON.stringify(items));
+      localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+      console.log(JSON.stringify(items));
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="header">
