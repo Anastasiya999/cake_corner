@@ -1,33 +1,32 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSort, selectSort } from "../redux/slices/filterSlice";
+import { setSort, selectSort, SortType } from "../redux/slices/filterSlice";
 
-type Criterium = {
-  name: string;
-  sortProperty: string;
-};
-
-export const criteria: Criterium[] = [
+export const criteria: SortType[] = [
   { name: "popularity", sortProperty: "rating" },
   { name: "price", sortProperty: "price" },
   { name: "alphabet", sortProperty: "name" },
 ];
 
-function Sort() {
+type SortTypeProps = {
+  value: SortType;
+};
+
+const Sort: React.FC<SortTypeProps> = React.memo(({ value }) => {
   const dispatch = useDispatch();
-  const value = useSelector(selectSort);
+
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleSelect = (index: Criterium) => {
+  const handleSelect = (index: SortType) => {
     dispatch(setSort(index));
     setIsOpen(false);
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (!e.path.includes(sortRef.current)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
         setIsOpen(false);
       }
     };
@@ -77,6 +76,6 @@ function Sort() {
       )}
     </div>
   );
-}
+});
 
 export default Sort;

@@ -1,6 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
+export type SortType = {
+  name: string;
+  sortProperty: "rating" | "price" | "name";
+};
+
+interface FilterSliceState {
+  searchValue: string;
+  categoryId: number;
+  sort: SortType;
+  currentPage: number;
+}
+
+const initialState: FilterSliceState = {
   searchValue: "",
   categoryId: 0,
   sort: {
@@ -14,7 +27,7 @@ export const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    setCategoryId: (state, action) => {
+    setCategoryId: (state, action: PayloadAction<number>) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
@@ -22,13 +35,13 @@ export const filterSlice = createSlice({
       state.categoryId = action.payload;
       console.log(action.payload);
     },
-    setSort: (state, action) => {
+    setSort: (state, action: PayloadAction<SortType>) => {
       state.sort = action.payload;
     },
-    setCurrentPage: (state, action) => {
+    setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-    setFilters: (state, action) => {
+    setFilters: (state, action: PayloadAction<FilterSliceState>) => {
       state.currentPage = Number(action.payload.currentPage);
       state.sort = action.payload.sort;
       state.categoryId = Number(action.payload.categoryId);
@@ -48,7 +61,7 @@ export const {
   setSearchValue,
 } = filterSlice.actions;
 
-export const selectSort = (state) => state.filter.sort;
-export const selectFilter = (state) => state.filter;
+export const selectSort = (state: RootState) => state.filter.sort;
+export const selectFilter = (state: RootState) => state.filter;
 
 export default filterSlice.reducer;

@@ -1,6 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, selectCartById } from "../../redux/slices/cartSlice";
+import {
+  addItem,
+  CartItemType,
+  selectCartById,
+} from "../../redux/slices/cartSlice";
+import { Product } from "../../redux/slices/productSlice";
 
 type ProductCardProps = {
   id: number;
@@ -23,12 +28,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItemType = {
       id,
       name,
       price,
       imageUrl,
       size: sizes[activeSize],
+      count: 0,
     };
 
     dispatch(addItem(item));

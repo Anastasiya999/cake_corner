@@ -1,23 +1,24 @@
 import React from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import qs from "qs";
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Categories from "../components/Categories";
 import Sort, { criteria } from "../components/Sort";
 import ProductCard from "../components/ProductCard";
+import Pagination from "../components/Pagination";
 import Skeleton from "../components/ProductCard/Skeleton";
+import { useAppDispatch } from "../redux/store";
 
 import {
   setCategoryId,
   setFilters,
   selectFilter,
+  setCurrentPage,
 } from "../redux/slices/filterSlice";
-
-import Pagination from "../components/Pagination";
 import { fetchProducts, selectProductData } from "../redux/slices/productSlice";
+
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const isSearch = React.useRef(false);
@@ -28,8 +29,12 @@ const Home: React.FC = () => {
   const { items, status } = useSelector(selectProductData);
   const sortType = sort.sortProperty;
 
-  const onChangeCategoryId = (id: number) => {
+  const onChangeCategoryId = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
+  }, []);
+
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page));
   };
 
   const fetchItems = async () => {
@@ -39,9 +44,8 @@ const Home: React.FC = () => {
     const search = searchValue ? `search=${searchValue}` : "";
 
     dispatch(
-      //@ts-ignore
       fetchProducts({
-        currentPage,
+        currentPage: String(currentPage),
         category,
         sortBy,
         search,
@@ -64,16 +68,15 @@ const Home: React.FC = () => {
       const sort = criteria.find(
         (item) => item.sortProperty == params.sortProperty
       );
+
       dispatch(
         setFilters({
-          ...params,
-          sort,
+          searchValue: String(params.search),
+          categoryId: Number(params.categoryId),
+          currentPage: Number(params.currentPage),
+          sort: sort || criteria[0],
         })
       );
-      console.log({
-        ...params,
-        sort,
-      });
       isSearch.current = true;
     }
   }, []);
@@ -97,7 +100,7 @@ const Home: React.FC = () => {
     <>
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategoryId} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className=" content__title "> All cakes </h2>
       <div className="content__items">
@@ -109,7 +112,7 @@ const Home: React.FC = () => {
               return <ProductCard key={item.id} {...item} />;
             })}
       </div>
-      <Pagination page={currentPage} />
+      <Pagination page={currentPage} onPageChange={onChangePage} />
     </>
   );
 };
