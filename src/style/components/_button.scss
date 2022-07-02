@@ -31,6 +31,8 @@
 
   &--outline {
     background-color: transparent;
+    font-family: $ff-serif;
+    font-size: $fs--400;
     border-color: $dark-medium-clr;
     &,
     span {
@@ -139,9 +141,7 @@
   &--pay {
     background-color: transparent;
     color: $dark-medium-clr;
-    font-size: $fs--400;
     border: 1px solid $dark-medium-clr;
-    font-family: $ff-serif;
 
     &:hover {
       color: $light-clr;

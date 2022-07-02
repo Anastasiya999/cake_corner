@@ -5,7 +5,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
   gap: 1rem;
 
   &__empty {
@@ -38,10 +38,13 @@
       }
 
       svg {
-        height: 1.6em;
+        height: 1.5em;
         path {
           fill: $dark-medium-clr;
         }
+      }
+      @media (max-width: 300px) {
+        visibility: hidden;
       }
     }
 
@@ -51,6 +54,9 @@
         font-size: $fs--400;
         margin-left: 0.2em;
         color: $dark-medium-clr;
+        @media (max-width: 300px) {
+          display: none;
+        }
       }
 
       svg {
@@ -72,7 +78,6 @@
   }
 
   &__items {
-    padding-top: 2em;
     overflow-x: auto;
   }
 
@@ -178,6 +183,8 @@
     &-buttons {
       padding-inline: 1.5em;
       display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em;
       justify-content: space-between;
       margin-top: 2em;
     }
