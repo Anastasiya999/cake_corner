@@ -4,8 +4,6 @@
 @import "./components/all";
 
 body {
-  // background-color: $light-clr;
-
   background-image: url("../../public/img/background.jpg");
   background-size: contain;
 }
@@ -15,8 +13,11 @@ body {
   height: 100%;
 
   margin: 40px auto;
-  border-radius: 10px;
   max-width: 1400px;
+
+  @media (max-width: 500px) {
+    width: calc(100vw - 50px);
+  }
 }
 
 .content {
@@ -52,7 +53,6 @@ body {
   &__title {
     margin: 35px 0;
     font-size: $fs--600;
-    font-family: $ff-serif;
     color: $dark-medium-clr;
   }
 }
@@ -64,4 +64,9 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: darken($secondary-clr, 10%);
+}
+
+h1,
+h4 {
+  font-family: $ff-cursive;
 }

@@ -22,12 +22,15 @@
     h1 {
       color: $dark-clr;
       font-size: $fs--600;
-      font-family: $ff-cursive;
       font-weight: 400;
+    }
 
-      @media (max-width: 415px) {
+    @media (max-width: 415px) {
+      h1 {
         font-size: $fs--500;
       }
+
+      justify-content: flex-start;
     }
   }
 }

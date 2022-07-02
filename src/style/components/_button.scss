@@ -1,8 +1,12 @@
 @import "../variables";
 
+button {
+  font-family: $ff-serif;
+  font-size: $fs--400;
+}
+
 .button {
   display: inline-block;
-
   border-radius: 30px;
   padding: 10px 20px;
   min-width: 100px;
@@ -31,8 +35,6 @@
 
   &--outline {
     background-color: transparent;
-    font-family: $ff-serif;
-    font-size: $fs--400;
     border-color: $dark-medium-clr;
     &,
     span {
@@ -141,8 +143,6 @@
   &--pay {
     background-color: transparent;
     color: $dark-medium-clr;
-    font-size: $fs--400;
-    font-family: $ff-serif;
     border: 1px solid $dark-medium-clr;
 
     &:hover {
