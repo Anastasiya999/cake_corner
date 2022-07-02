@@ -119,8 +119,8 @@ button {
     &:hover {
       background-color: $primary-clr;
 
-      &,
-      span {
+      span,
+      p {
         color: $light-clr;
       }
 

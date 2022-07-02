@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# :book: Table of Content:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [About The Project](#project-description)
+- [Goals and Scenarios](#goals)
+- [Technologies](#technologies)
+- [Getting Started](#getting-started)
+- [Landing page](#landing-page)
+- [Screenshots](#screenshots)
+- [To do](#todo)
+- [Demo](#demo)
 
-## Available Scripts
+## :pencil: About The Project
 
-In the project directory, you can run:
+The aim of this project was to create a website for some bakery. The project was developed for learning purposes. By implementing bakery website I got aquinted with Typescript syntax, learn how to manipulate state using Redux Toolkit and deal with asynchronous requests and manage RESTful API. In addition I became familiar with the use of React.memo and useCallback in order to optimise rerendering. I used BEM methodology to style components and SASS as preprocessor for CSS.
 
-### `npm start`
+## :rocket: Goals and Scenarios
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The implemented website presents an imaginary bakery shop where you can choose and buy various cakes. The main functionalities are:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- searching
+- filtering by categories
+- sorting by price/popularity/alphabetically
+- choosing different sizes
+- adding to cart and managing the quantity
 
-### `npm test`
+## :computer: Technologies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- TypeScript
+- ReactJS 18, React Hooks
+- React Router v6
+- Axios + Fetch
+- Redux
+- CSS-Modules / SCSS
+- React Content Loader
+- React Pagination
+- Lodash.Debounce
+- Code Splitting
 
-### `npm run build`
+## :pushpin: Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+First of all download the project. Then in the project directory use the following command to start the application:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app will be in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm run eject`
+## Screenshots
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Landing page
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![landing](screenshots/landingPage.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Cart
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![cart](screenshots/cart.png)
 
-## Learn More
+### Empty cart
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![emptyCart](screenshots/emptyCart.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Not found page
 
-### Code Splitting
+![notFoundPage](screenshots/notFound.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## To do(and some bugs)
 
-### Analyzing the Bundle Size
+There are some issues with filtering: you can not filter items while you are not on the first page. This is connected with mockapi service, which allows to do filtering and searching, but does it wrong when you use PAGINATION at the same time.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Functionalities to be implemented:
 
-### Making a Progressive Web App
+- ordering cakes
+- storing recent orders
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Demo
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Current demo version: [https://cake-corner-pink.vercel.app/](https://cake-corner-pink.vercel.app/)
