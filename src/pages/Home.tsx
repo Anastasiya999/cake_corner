@@ -39,8 +39,7 @@ const Home: React.FC = () => {
   };
 
   const fetchItems = async () => {
-    const category =
-      categoryId > 0 && currentPage == 1 ? `category=${categoryId}` : "";
+    const category = categoryId > 0 ? `category=${categoryId}` : "";
     const sortBy = `sortBy=${sortType}`;
     const search = searchValue ? `search=${searchValue}` : "";
 
@@ -53,13 +52,6 @@ const Home: React.FC = () => {
       })
     );
   };
-  //if we have params in url during first render don't fetch data
-  React.useEffect(() => {
-    if (!isSearch.current) {
-      fetchItems();
-    }
-    isSearch.current = false;
-  }, [categoryId, sortType, searchValue, currentPage]);
 
   //on first render chceck url parameters, if so - save in redux store
   React.useEffect(() => {
@@ -79,8 +71,20 @@ const Home: React.FC = () => {
         })
       );
       isSearch.current = true;
+      console.log(1.1);
     }
+    console.log(1);
   }, []);
+
+  React.useEffect(() => {
+    if (!isSearch.current) {
+      fetchItems();
+      console.log(3.1);
+    }
+
+    console.log(3);
+    isSearch.current = false;
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   //first render - don't save params to url
   React.useEffect(() => {
@@ -92,10 +96,14 @@ const Home: React.FC = () => {
       });
 
       navigate(`?${query}`);
+      console.log(2.1);
     }
     // flag the first render
+    console.log(2);
     isMounted.current = true;
   }, [categoryId, sortType, searchValue, currentPage]);
+
+  //if we have params in url during first render don't fetch data
 
   return (
     <>

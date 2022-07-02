@@ -1,7 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { setSort } from "../redux/slices/filter/slice";
 import { SortType } from "../redux/slices/filter/types";
+import { useAppDispatch } from "../redux/store";
 
 export const criteria: SortType[] = [
   { name: "popularity", sortProperty: "rating" },
@@ -14,7 +14,7 @@ type SortTypeProps = {
 };
 
 const Sort: React.FC<SortTypeProps> = React.memo(({ value }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const sortRef = React.useRef<HTMLDivElement>(null);
 
@@ -22,6 +22,7 @@ const Sort: React.FC<SortTypeProps> = React.memo(({ value }) => {
 
   const handleSelect = (index: SortType) => {
     dispatch(setSort(index));
+
     setIsOpen(false);
   };
 

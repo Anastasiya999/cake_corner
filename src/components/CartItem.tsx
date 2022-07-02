@@ -26,12 +26,13 @@ const CartItem: React.FC<CartItemProps> = ({
     dispatch(
       addItem({
         id,
+        size,
       } as CartItemType)
     );
   };
 
   const handleMinus = () => {
-    dispatch(minusItem(id));
+    dispatch(minusItem({ id, size }));
   };
   return (
     <div className="cart__item">

@@ -22,7 +22,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartById(id));
   const [activeSize, setActiveSize] = React.useState(0);
-  const addedCount = cartItem ? cartItem.count : 0;
+  const addedCount = cartItem
+    ? cartItem.reduce((sum, item) => sum + item.count, 0)
+    : 0;
 
   const onClickAdd = () => {
     const item: CartItemType = {

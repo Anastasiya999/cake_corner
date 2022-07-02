@@ -11,3 +11,8 @@ export interface CartSliceState {
   totalPrice: number;
   items: CartItemType[];
 }
+
+export interface CartProductRemove {
+  id: number;
+  size: number;
+}

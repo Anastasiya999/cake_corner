@@ -3,7 +3,7 @@ import { FilterSliceState, SortType } from "./types";
 
 const initialState: FilterSliceState = {
   searchValue: "",
-  categoryId: 0,
+  categoryId: -1,
   sort: {
     name: "popularity",
     sortProperty: "rating",
@@ -21,7 +21,6 @@ export const filterSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       state.categoryId = action.payload;
-      console.log(action.payload);
     },
     setSort: (state, action: PayloadAction<SortType>) => {
       state.sort = action.payload;
