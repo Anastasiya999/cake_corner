@@ -2,12 +2,15 @@
 
 .pagination {
   margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1em;
   :global {
     li {
       display: inline-block;
       margin-right: 1em;
       a {
-        padding: 0.5em 1em;
+        padding: 0.3em 0.7em;
         border: 1px solid $primary-clr;
         border-radius: 30px;
 

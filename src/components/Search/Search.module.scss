@@ -3,6 +3,10 @@
   width: 30%;
   text-align: end;
 
+  @media (max-width: 800px) {
+    visibility: hidden;
+  }
+
   img {
     position: absolute;
     right: 0;

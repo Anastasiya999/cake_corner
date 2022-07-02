@@ -85,9 +85,13 @@
     align-items: center;
     transition: background-color 0.2s ease-in-out;
     border-radius: 10px;
-
-    &:hover {
-      background-color: transparentize($color: $dark-light-clr, $amount: 0.9%);
+    @media (min-width: 850px) {
+      &:hover {
+        background-color: transparentize(
+          $color: $dark-light-clr,
+          $amount: 0.9%
+        );
+      }
     }
 
     &-img {
