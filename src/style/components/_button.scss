@@ -141,6 +141,8 @@
   &--pay {
     background-color: transparent;
     color: $dark-medium-clr;
+    font-size: $fs--400;
+    font-family: $ff-serif;
     border: 1px solid $dark-medium-clr;
 
     &:hover {
