@@ -2,6 +2,9 @@
 
 .header {
   padding: 10px 0;
+  @media (max-width: 400px) {
+    padding: 0.5em 0;
+  }
 
   .container {
     width: 100%;
@@ -22,8 +25,8 @@
       font-family: $ff-cursive;
       font-weight: 400;
 
-      @media (max-width: 400px) {
-        font-size: $fs--400;
+      @media (max-width: 415px) {
+        font-size: $fs--500;
       }
     }
   }
